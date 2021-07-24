@@ -1,0 +1,39 @@
+<html>
+<body>
+<form action="/request" method="post">
+	<label for="url">URL:</label><br>
+	<textarea id="url" name="url" cols="80" rows ="5">http://spingboothelloword-env.eba-pnpiwrah.us-east-2.elasticbeanstalk.com/</textarea><br>
+	<label for="method">Method</label><br>
+	<select name="method" id="method">
+	  <option value="GET">GET</option>
+	  <option value="POST">POST</option>
+	  <option value="PUT">PUT</option>
+	  <option value="DELETE">DELETE</option>
+	</select><br>
+	<label for="content">Content:</label><br>
+	<textarea id="content" name="content" value="" cols="80" rows ="20"></textarea><br>
+	<input type="submit" value="submit">
+</form>	
+
+</body>
+<script type="text/javascript">
+	
+document.getElementById('content').addEventListener('keydown', function(e) {
+  if (e.key == 'Tab') {
+    e.preventDefault();
+    var start = this.selectionStart;
+    var end = this.selectionEnd;
+
+    // set textarea value to: text before caret + tab + text after caret
+    this.value = this.value.substring(0, start) +
+      "\t" + this.value.substring(end);
+
+    // put caret at right position again
+    this.selectionStart =
+      this.selectionEnd = start + 1;
+  }
+});
+
+	
+</script>
+</html>
