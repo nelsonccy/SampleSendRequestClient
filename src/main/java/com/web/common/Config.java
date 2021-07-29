@@ -9,9 +9,16 @@ public class Config {
 	
 	@Value("${url.create}")
 	private String createUrl;
+	@Value("${url.sendMoney}")
+	private String sendMoneyUrl;
 	
 	@Bean
 	public String getCreateURL() {
 		return createUrl;
+	}
+	
+	@Bean
+	public String getSendMoneyURL() {
+		return sendMoneyUrl;
 	}
 }

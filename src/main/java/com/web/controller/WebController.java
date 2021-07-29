@@ -1,5 +1,6 @@
 package com.web.controller;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,6 +27,8 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.web.common.Config;
 import com.web.json.Account;
+
+import net.minidev.json.JSONObject;
 
 @Controller
 public class WebController {
@@ -101,7 +104,7 @@ public class WebController {
 	
 	@PostMapping("/create")
 	@ResponseBody
-	public ResponseEntity<String> create(@RequestParam String name,@RequestParam Long balance) {
+	public ResponseEntity<String> create(@RequestParam String name,@RequestParam BigDecimal balance) {
 		ResponseEntity<String> response= null;
 		String url = config.getCreateURL(); 
 		RestTemplate restTemplate = new RestTemplate();
@@ -113,11 +116,36 @@ public class WebController {
 		
 		response = restTemplate.postForEntity(url, request, String.class);
 		
-		
-		StringBuilder sb = new StringBuilder();
 		return response;
+				
+		
+	}
+	
+	@PostMapping("/sendMoney")
+	@ResponseBody
+	public ResponseEntity<String> sendMoney(@RequestParam Long senderId,@RequestParam Long receiverId,@RequestParam BigDecimal amount) {
+		ResponseEntity<String> response= null;
+		String url = config.getSendMoneyURL(); 
+		RestTemplate restTemplate = new RestTemplate();
+		HttpHeaders header = new HttpHeaders();
+		header.setContentType(MediaType.APPLICATION_JSON);
 		
 		
+		
+		JSONObject json = new JSONObject();
+		json.put("senderId", senderId);
+		json.put("receiverId", receiverId);
+		json.put("amount", amount);
+		
+		
+		
+		
+		System.out.println(json.toJSONString());
+		HttpEntity<String> request = new HttpEntity<String>(json.toJSONString(),header);
+		
+		response = restTemplate.postForEntity(url, request, String.class);
+		
+		return response;
 				
 		
 	}
