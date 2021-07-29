@@ -60,7 +60,7 @@ public class WebController {
 			logger.info("GETTING");
 			response=template.getForEntity(url, String.class,request);
 			//below code for mapping a request to object
-			if(url.equals("http://sendrequestclient.us-east-2.elasticbeanstalk.com/getAll")) {
+			if(url.equals("http://spingboothelloword-env.eba-pnpiwrah.us-east-2.elasticbeanstalk.com/getAll")) {
 				ObjectMapper mapper = new ObjectMapper();
 				Account[] list;
 				try {
