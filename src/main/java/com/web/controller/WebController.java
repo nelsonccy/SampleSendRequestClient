@@ -67,11 +67,11 @@ public class WebController {
 					String json= response.getBody();
 					list = mapper.readValue(json,Account[].class);
 					
-					String res ="Custom Response from entity object: ";
+					String res ="Custom Response from entity object: <br>";
 					for(Account ac:list) {
-						res+=ac.getName();
+						res+=ac.getName()+":";
 						res+=ac.getBalance();
-						res+=",";
+						res+=", ";
 					}
 					return ResponseEntity.ok(res);
 				
