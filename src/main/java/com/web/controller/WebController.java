@@ -60,15 +60,15 @@ public class WebController {
 			logger.info("GETTING");
 			response=template.getForEntity(url, String.class,request);
 			//below code for mapping a request to object
-			if(url.contains("getAll")) {
+			if(url.equals("http://sendrequestclient.us-east-2.elasticbeanstalk.com/getAll")) {
 				ObjectMapper mapper = new ObjectMapper();
 				Account[] list;
 				try {
 					String json= response.getBody();
 					list = mapper.readValue(json,Account[].class);
-					List<Account> arrList = Arrays.asList(list);
-					String res ="";
-					for(Account ac:arrList) {
+					
+					String res ="Custom Response from entity object: ";
+					for(Account ac:list) {
 						res+=ac.getName();
 						res+=ac.getBalance();
 						res+=",";
@@ -103,7 +103,7 @@ public class WebController {
 	@ResponseBody
 	public ResponseEntity<String> create(@RequestParam String name,@RequestParam Long balance) {
 		ResponseEntity<String> response= null;
-		String url = config.getCreateURL();
+		String url = config.getCreateURL(); 
 		RestTemplate restTemplate = new RestTemplate();
 		MultiValueMap<String,Object> map = new LinkedMultiValueMap<>();
 		map.add("name", name);
@@ -113,8 +113,12 @@ public class WebController {
 		
 		response = restTemplate.postForEntity(url, request, String.class);
 		
+		
+		StringBuilder sb = new StringBuilder();
 		return response;
 		
+		
+				
 		
 	}
 	
