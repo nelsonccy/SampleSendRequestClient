@@ -1,7 +1,7 @@
 # SampleSendRequestClient
 SimpleSendRequestClient
 
-Only support Get and Post
+send JSON request to any API url
 
 http://sendrequestclient.us-east-2.elasticbeanstalk.com/
 
